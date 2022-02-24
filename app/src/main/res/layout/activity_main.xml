@@ -8,31 +8,32 @@
     android:background="@drawable/gradient_fresh_milk">
 
     <ImageView
+        android:id="@+id/login_img"
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:src="@mipmap/todooo"
-        android:id="@+id/login_img"
         android:layout_marginStart="5dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="75dp"
-        ></ImageView>
+        android:contentDescription="@string/todo"
+        android:src="@mipmap/todooo"
+        tools:ignore="ImageContrastCheck"></ImageView>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username_field"
-        android:hint="Username"
+        android:hint="@string/username"
         android:layout_margin="14dp"
-        android:drawableLeft="@drawable/person_asset"
+        android:drawableStart="@drawable/person_asset"
         android:drawablePadding="15dp"
         android:textColorHint="#696969"
         android:textStyle="bold"
         android:layout_below="@+id/login_img"
         android:background="#75feada6"
         android:padding="20dp"
-
-        ></EditText>
+        android:inputType="text"
+        android:autofillHints=""></EditText>
 
     <EditText
         android:id="@+id/password_field"
@@ -44,13 +45,14 @@
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="14dp"
         android:background="#75feada6"
-        android:drawableLeft="@drawable/password_asset"
+        android:drawableStart="@drawable/password_asset"
         android:drawablePadding="15dp"
-        android:hint="Password"
+        android:hint="@string/password"
         android:padding="20dp"
         android:textColorHint="#696969"
         android:textStyle="bold"
-        android:inputType="textPassword"></EditText>
+        android:inputType="textPassword"
+        android:autofillHints=""></EditText>
 
     <Button
         android:id="@+id/register_button"
@@ -65,14 +67,14 @@
         android:backgroundTint="#feada6"
         android:gravity="center"
         android:padding="12dp"
-        android:text="login"
+        android:text="@string/login"
         android:textColor="@color/black"></Button>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/acc_inquiry"
-        android:text="don't have an account ?"
+        android:text="@string/don_t_have_an_account"
         android:gravity="center"
         android:layout_below="@id/register_button"
         android:layout_marginTop="10dp"
@@ -81,15 +83,15 @@
         ></TextView>
 
     <TextView
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/register"
         android:layout_below="@id/acc_inquiry"
         android:layout_marginTop="3dp"
         android:gravity="center"
-        android:text="Register now !"
-        android:textColor="#ffb199"
-        android:textSize="18dp"
+        android:text="@string/register_now"
+        android:textColor="#E64A19"
+        android:textSize="18sp"
         android:textStyle="bold"></TextView>
 
 </RelativeLayout>
