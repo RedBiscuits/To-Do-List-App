@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DatabaseAdapter {
 
     static DatabaseHelper dbHelper;
@@ -33,26 +35,26 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public Credentials getUser(){
-        Credentials credentials = null;
+    public ArrayList<Credentials> getUsers(){
+        ArrayList<Credentials> credentials = null;
         Cursor c;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] columns = {DatabaseHelper.COL_USERNAME , DatabaseHelper.COL_PASSWORD};
         c = db.query(DatabaseHelper.TABLE_CREDENTIALS , columns , null,null,null,null,null);
         while(c.moveToNext()){
-            credentials = new Credentials(c.getString(0),c.getString(1));
+            credentials.add(new Credentials(c.getString(0),c.getString(1)));
         }
         return credentials;
     }
 
-    public Task getTask(){
-        Task task = null;
+    public ArrayList<Task> getTasks(){
+        ArrayList<Task> task = null;
         Cursor c;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] columns = {DatabaseHelper.COL_TASK , DatabaseHelper.COL_STATUS};
         c = db.query(DatabaseHelper.TABLE_TASKS , columns , null,null,null,null,null);
         while(c.moveToNext()){
-            task = new Task(c.getString(0),Integer.parseInt(c.getString(1)));
+            task.add(new Task(c.getString(0),Integer.parseInt(c.getString(1))));
         }
         return task;
     }
