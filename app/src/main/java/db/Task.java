@@ -2,8 +2,8 @@ package db;
 
 public class Task {
     private String description;
-    private int status;
-
+    private int status = 0;
+    private int id;
     public String getDescription() {
         return description;
     }
@@ -16,12 +16,16 @@ public class Task {
         return status;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setStatus(int status) {
         this.status = status;
     }
 
-    public Task(String description, int status) {
-        this.description = description;
-        this.status = status;
-    }
 }

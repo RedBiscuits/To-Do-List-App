@@ -21,7 +21,6 @@ public class Registration extends AppCompatActivity {
     EditText username;
     EditText password;
     EditText confirmation;
-    Validator validator = new Validator(Registration.this);
 
     @Override
 
@@ -47,15 +46,6 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                short result = register(username.toString(),password.toString(),confirmation.toString());
-                if(result == 1){
-                    Toast.makeText(Registration.this,"Passwords don't match!" , Toast.LENGTH_LONG);
-                }else if(result == 2){
-                    Toast.makeText(Registration.this,"Username is not available" , Toast.LENGTH_LONG);
-                }else{
-                    Toast.makeText(Registration.this,"Registered successfully!" , Toast.LENGTH_LONG);
-                    navigateToLogin();
-                }
             }
         });}
 
@@ -68,14 +58,7 @@ public class Registration extends AppCompatActivity {
         if(!password.equals(confirmation)){
             return 1;
         }else{
-            ArrayList<Credentials> users = validator.getUsers();
-            for(int i = 0 ; i < users.size();i++){
-                if(username.equals(users.get(i).getUsername())){
-                    return 2;
-                }
-            }
-            validator.addUser(username,password);
-            return 0;
+             return 0;
         }
     }
 }
