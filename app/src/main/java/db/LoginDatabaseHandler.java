@@ -9,13 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class LoginDatabaseHandler extends SQLiteOpenHelper {
-    public static final int VERSION = 1;
+    public static final int VERSION = 9;
     public static final String NAME = "loginDatabase";
     public static final String USERS_TABLE = "users";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
-    public static final String CREATE_LOGIN_TABLE = "CREATE TABLE " + USERS_TABLE + "("
-            + USERNAME + "TEXT PRIMARY KEY , " + PASSWORD + " TEXT)";
+    public static final String CREATE_LOGIN_TABLE = "create Table users(username TEXT primary key, password TEXT)";
 
     public LoginDatabaseHandler(Context context) {
         super(context,NAME, null,VERSION);
@@ -29,7 +28,8 @@ public class LoginDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL(new StringBuilder().append("DROP TABLE IF EXISTS").append(USERS_TABLE).toString());
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS users");
+        onCreate(sqLiteDatabase);
     }
 
     public Boolean insertData(String username, String password) {
@@ -51,9 +51,8 @@ public class LoginDatabaseHandler extends SQLiteOpenHelper {
     }
 
     public Boolean checkUsernameAndPassword(String username, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + USERS_TABLE + " WHERE " + USERNAME +
-                " = ? and " + PASSWORD + " = ?", new String[]{username, password});
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from users where username = ? and password = ?",new String[]{username,password});
         if (cursor.getCount() > 0) return true;
         else return false;
     }

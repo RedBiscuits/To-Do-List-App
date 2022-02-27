@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import db.Credentials;
+import db.LoginDatabaseHandler;
 
 public class Registration extends AppCompatActivity {
     Intent navigateToLogin;
@@ -21,6 +22,7 @@ public class Registration extends AppCompatActivity {
     EditText username;
     EditText password;
     EditText confirmation;
+    LoginDatabaseHandler dbHelper;
 
     @Override
 
@@ -32,6 +34,7 @@ public class Registration extends AppCompatActivity {
         password = findViewById(R.id.password_field);
         confirmation = findViewById(R.id.password_confirmation_field);
 
+        dbHelper = new LoginDatabaseHandler(this);
 
         loginText = findViewById(R.id.login_inquiry);
         loginText.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +48,30 @@ public class Registration extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String user = username.getText().toString();
+                String pass = password.getText().toString();
+                String conf = confirmation.getText().toString();
+
+                if(user.equals("")||pass.equals("")||conf.equals("")){
+                    Toast.makeText(Registration.this , "Empty fields are not allowed",Toast.LENGTH_LONG).show();
+                }else{
+                    if(pass.equals(conf)){
+                        Boolean checkUser = dbHelper.checkUsername(user);
+                        if(!checkUser){
+                            Boolean insert = dbHelper.insertData(user,pass);
+                            if(insert){
+                                Toast.makeText(Registration.this,"Registered Successfully",Toast.LENGTH_LONG).show();
+                                navigateToLogin();
+                            }else{
+                                Toast.makeText(Registration.this,"Registered Failed!!",Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            Toast.makeText(Registration.this,"User Already Exists!!",Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Toast.makeText(Registration.this,"Passwords is not matching!",Toast.LENGTH_LONG).show();
+                    }
+                }
 
             }
         });}

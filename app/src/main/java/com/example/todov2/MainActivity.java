@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import db.Credentials;
+import db.LoginDatabaseHandler;
 
 public class MainActivity extends AppCompatActivity {
     TextView register;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
+    LoginDatabaseHandler DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,24 @@ public class MainActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username_field);
         password = findViewById(R.id.password_field);
+        DB = new LoginDatabaseHandler(this);
         loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String user = username.getText().toString();
+                String pass = password.getText().toString();
 
+                if(user.equals("")||pass.equals("")){
+                    Toast.makeText(MainActivity.this,"Please fill both fields!",Toast.LENGTH_LONG).show();
+                }else{
+                    Boolean checkUser = DB.checkUsernameAndPassword(user,pass);
+                    if(checkUser){
+                        navigateToTasks();
+                    }else{
+                        Toast.makeText(MainActivity.this,"Invalid Credentials",Toast.LENGTH_LONG).show();
+                    }
+                }
 
             }
         });
