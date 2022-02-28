@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TasksDatabaseHandler extends SQLiteOpenHelper {
 
-    public static final int VERSION = 1;
+    public static final int VERSION = 5;
     public static final String NAME = "toDoListDatabase";
     public static final String TODO_TABLE = "todo";
     public static final String ID = "id";
@@ -20,7 +20,6 @@ public class TasksDatabaseHandler extends SQLiteOpenHelper {
     public static final String STATUS = "status";
     public static final String CREATE_TODO_TABLE = "CREATE TABLE "+TODO_TABLE + "(" +ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             +TASK + "TEXT, " + STATUS + " INTEGER)";
-
     private SQLiteDatabase db;
     public TasksDatabaseHandler(Context context){
         super(context , NAME , null , VERSION);
@@ -57,13 +56,13 @@ public class TasksDatabaseHandler extends SQLiteOpenHelper {
             cursor=db.query(TODO_TABLE,null,null,null,null,null,null);
             if(cursor!=null){
                 if(cursor.moveToFirst()){
-                    do {
+                    while (cursor.moveToNext()){
                         Task task = new Task() ;
                         task.setId(cursor.getInt(cursor.getColumnIndex(ID)));
                         task.setTask(cursor.getString(cursor.getColumnIndex(TASK)));
                         task.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS)));
                         tasks.add(task);
-                    }while (cursor.moveToNext());
+                    }
                 }
             }
         }finally {

@@ -3,7 +3,7 @@ package db;
 public class Task {
     private String task = "Welcome";
     private int status = 0;
-    private int id;
+    private int id =0;
     public String getTask() {
         return task;
     }

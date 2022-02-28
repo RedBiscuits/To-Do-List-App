@@ -38,7 +38,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container , Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.activity_tasks,container,false);
+        View view = inflater.inflate(R.layout.new_task,container,false);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return view;
     }
@@ -47,7 +47,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
     public void onViewCreated(View view , Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
         newTaskText = getView().findViewById(R.id.newTaskText);
-        saveButton = getView().findViewById(R.id.newTaskButton);
+        saveButton = getView().findViewById(R.id.saveButton);
 
         db = new TasksDatabaseHandler(getActivity());
         db.openDatabase();
@@ -83,6 +83,8 @@ public class AddNewTask extends BottomSheetDialogFragment {
 
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    saveButton.setEnabled(true);
+                    saveButton.setTextColor(Color.rgb(69,69,69));
 
                 }
             });
@@ -97,10 +99,17 @@ public class AddNewTask extends BottomSheetDialogFragment {
                         Task task = new Task();
                         task.setTask(text);
                         task.setStatus(0);
+                        db.insertTask(task);
                     }
                     dismiss();
                 }
             });
+        }else{
+            String text = newTaskText.getText().toString();
+            Task task = new Task();
+            task.setTask(text);
+            task.setStatus(0);
+            db.insertTask(task);
         }
     }
     @Override

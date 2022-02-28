@@ -45,9 +45,14 @@ public class TasksActivity extends AppCompatActivity  implements DialogCloseList
                 ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
+        Task taskk = new Task();
+        taskk.setId(123);
+        taskk.setStatus(1);
+        taskk.setTask("hello");
         taskList = db.getAllTasks();
         Collections.reverse(taskList);
         taskList.add(new Task());
+        taskList.add(taskk);
         tasksAdapter.setTasks(taskList);
 
         fab.setOnClickListener(new View.OnClickListener() {
