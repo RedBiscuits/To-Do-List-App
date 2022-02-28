@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +16,7 @@
         android:layout_marginBottom="0dp"
         android:contentDescription="@string/todo"
         android:src="@mipmap/todooo"
-        tools:ignore="ImageContrastCheck"></ImageView>
+        tools:ignore="ImageContrastCheck"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +42,7 @@
             android:inputType="text"
             android:padding="20dp"
             android:textColorHint="#696969"
-            android:textStyle="bold"></EditText>
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/password_field"
@@ -58,7 +57,7 @@
             android:inputType="textPassword"
             android:padding="20dp"
             android:textColorHint="#696969"
-            android:textStyle="bold"></EditText>
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <Button
@@ -72,7 +71,7 @@
         android:gravity="center"
         android:paddingHorizontal="35dp"
         android:text="@string/login"
-        android:textColor="@color/black"></Button>
+        android:textColor="@color/black"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -84,7 +83,7 @@
         android:layout_below="@id/login_button"
         android:textColor="#696969"
         android:textStyle="bold"
-        ></TextView>
+        />
 
     <TextView
         android:id="@+id/register"
@@ -96,6 +95,6 @@
         android:text="@string/register_now"
         android:textColor="#E64A19"
         android:textSize="18sp"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold"/>
 
 </RelativeLayout>

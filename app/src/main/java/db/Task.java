@@ -1,15 +1,15 @@
 package db;
 
 public class Task {
-    private String description;
+    private String task = "Welcome";
     private int status = 0;
     private int id;
-    public String getDescription() {
-        return description;
+    public String getTask() {
+        return task;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTask(String task) {
+        this.task = task;
     }
 
     public int getStatus() {

@@ -7,8 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class TasksDatabaseHandler extends SQLiteOpenHelper {
             +TASK + "TEXT, " + STATUS + " INTEGER)";
 
     private SQLiteDatabase db;
-    private TasksDatabaseHandler(Context context){
+    public TasksDatabaseHandler(Context context){
         super(context , NAME , null , VERSION);
     }
 
@@ -47,7 +45,7 @@ public class TasksDatabaseHandler extends SQLiteOpenHelper {
         ContentValues contentValues= new ContentValues();
         contentValues.put(STATUS , task.getStatus());
         db.insert(TODO_TABLE,null,contentValues);
-        contentValues.put(TASK , task.getDescription());
+        contentValues.put(TASK , task.getTask());
     }
 
     @SuppressLint("Range")
@@ -62,7 +60,7 @@ public class TasksDatabaseHandler extends SQLiteOpenHelper {
                     do {
                         Task task = new Task() ;
                         task.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-                        task.setDescription(cursor.getString(cursor.getColumnIndex(TASK)));
+                        task.setTask(cursor.getString(cursor.getColumnIndex(TASK)));
                         task.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS)));
                         tasks.add(task);
                     }while (cursor.moveToNext());

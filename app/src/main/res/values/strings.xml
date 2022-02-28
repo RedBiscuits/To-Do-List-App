@@ -6,4 +6,9 @@
     <string name="don_t_have_an_account">don\'t have an account ?</string>
     <string name="username">Username</string>
     <string name="todo">TODO</string>
+    <string name="save">Save</string>
+    <string name="new_task">New Task</string>
+    <string name="by_registering_you_agree_with_privacy_policy">By registering you agree with privacy policy.</string>
+    <string name="register">register</string>
+    <string name="already_have_an_account">already have an account ?</string>
 </resources>
